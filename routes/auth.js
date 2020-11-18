@@ -22,20 +22,24 @@ if (username === '') {
 //check if username exists already
 User.findOne({username: username})
 .then (found => {
-  if (found != null) {
+  if (found !== null) {
     res.render('signup', {message: 'This username is already taken, pls choose another one'})
   } else { // FINALLY CREATE NEW USER
     console.log("This would be a new user created")
     const salt = bcrypt.genSaltSync();
     console.log('salt: ', salt);
-    // const hash = bycrypt.hashSync(password, salt);
-    // User.create({username: username, password: hash})
+    const hash = bcrypt.hashSync(password, salt);
+    User.create({username: username, password: hash})
     // then(dbUser => {
     //   //log in 
     // })
-    res.render('/')
+    res.redirect('index')
   }
 })
+.catch( err => {
+  console.log('error while creating user:', err);
+  next(err);
+});
 // res.render('signup')
 })
 
