@@ -1,5 +1,31 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<p>Welcome {{#if user}} {{user.username}} {{/if}}</p>
+{{#if user}}
+<p>Psst, you're logged in, {{user.username}}! How nice!</p>
+{{/if}}
+{{#unless user}}
+<a href="/signup" class="btn btn-primary m-1">Signup</a>
+<a href="/login" class="btn btn-secondary m-1">Login</a>
+{{else}}
+<a href="/private" class="btn btn-primary m-1">Private Page</a>
+<a href="/logout" class="btn btn-secondary m-1">Logout</a>
+{{/unless}}
+
+
+{{!-- 
+<h1>{{title}}</h1>
+Hello {{username}}
+{{#if user}}
+<p>Psst, you're logged in, {{user.username}}! How nice!</p>
+{{/if}}
+
+{{#unless user}}
+<br>
 <a href="/login" class="btn btn-primary m-1">Do you wish to log in?</a><br>
 <a href="/signup" class="btn btn-secondary m-1">Register a new account</a>
+{{else}}
+<a href="/private"> class="btn btn-primary m-1"Private Page</a>
+<a href="/logout class="btn btn-secondary m-1">Logout</a>
+{{/unless}}
 
+ --}}
